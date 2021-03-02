@@ -11,7 +11,9 @@
             </div>
         </div>
         <div class="py-3" v-if="endereco !== null">
-            <crud-partial :endereco="endereco"></crud-partial>
+            <b-form @submit="onSubmit">
+                <crud-partial :endereco="endereco"></crud-partial>
+            </b-form>
         </div>
     </div>
 </template>
@@ -51,6 +53,18 @@ export default {
                 this.showToast();
                 this.endereco = null;
             }
+        },
+        async onSubmit(event) {
+            event.preventDefault()
+            await this.$axios.$post(`endereco`, this.endereco)
+
+            // this.$bvToast.toast('Endereço salvo com sucesso!', {
+            //   title: `Sucesso`,
+            //   variant: 'success',
+            //   solid: true,
+            // })
+
+            this.$router.push({ path: '/' });
         },
         showToast(erro = false){
             const message = erro ? 'CEP não encontrado' : 'CEP Inválido!'

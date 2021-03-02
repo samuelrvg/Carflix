@@ -37,6 +37,9 @@
                   <th>
                     <strong>Data Criação</strong>
                   </th>
+                  <th width="200">
+                    <strong>Ação</strong>
+                  </th>
               </tr>
           </thead>
           <tbody>
@@ -52,10 +55,14 @@
                 <td>{{ endereco.ddd }}</td>
                 <td>{{ endereco.siafi }}</td>
                 <td>{{ endereco.dataCriacao ? $moment(endereco.dataCriacao).format('DD/MM/YYYY') : '' }}</td>
+                <td>
+                  <NuxtLink class="btn btn-info" :to="`endereco/editar/${endereco.enderecoId}`"><span class="typcn typcn-edit font-size">Editar</span></NuxtLink>
+                  <b-button variant="danger" @click.prevent="excluir(endereco)">Excluir</b-button>
+                </td>
               </tr>
           </tbody>
       </table>
-      <b-pagination v-model="currentPage" :items="enderecos" :current-page="currentPage" :per-page="itemsPerPage" :total-rows="enderecos.length" size="sm"></b-pagination>
+      <b-pagination v-model="currentPage" :items="enderecos" :current-page="currentPage" :per-page="itemsPerPage" :total-rows="enderecos.length"></b-pagination>
     </div>
   </div>
 </template>
@@ -89,6 +96,24 @@ export default {
 
       this.enderecosPaginate = this.paginate(response)
       this.enderecos = response;
+    },
+    async excluir(endereco){
+      const confirmed = await this.$bvModal.msgBoxConfirm(`Tem certeza que deseja excluir o CEP: ${endereco.cep}?`);
+
+      if (!confirmed) return;
+
+      const { enderecoId } = await this.$axios.$delete(`endereco/${endereco.enderecoId}`);
+
+      this.$bvToast.toast('Excluido com sucesso', {
+        title: `Atenção`,
+        variant: 'success',
+        solid: true,
+      })
+
+      this.asyncData();
+    },
+    editar(){
+
     },
     paginate (array) {
       return array.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);

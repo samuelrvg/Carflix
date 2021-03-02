@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-md-12">
-            <b-form @submit="onSubmit">
+            <input id="enderecoId" v-model="endereco.enderecoId" type="hidden" name="enderecoId" class="form-control" required />
                 <div class="row">
                     <div class="col-md-6">
                         <b-form-group
@@ -164,7 +164,6 @@
 
                 <b-button type="submit" variant="primary">Salvar</b-button>
                 <!-- <b-button type="reset" variant="danger">Limpar</b-button> -->
-            </b-form>
         </div>
     </div>
 </template>
@@ -175,19 +174,5 @@ export default {
         return {
         }
     },
-    methods: {
-      async onSubmit(event) {
-        event.preventDefault()
-        await this.$axios.$post(`endereco`, this.endereco)
-
-        // this.$bvToast.toast('Endereço salvo com sucesso!', {
-        //   title: `Sucesso`,
-        //   variant: 'success',
-        //   solid: true,
-        // })
-
-        this.$router.push({ path: '/' });
-      },
-    }
 }
 </script>

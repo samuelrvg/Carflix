@@ -100,6 +100,7 @@ namespace Carflix.Api.Controllers
             _context.Endereco.Remove(endereco);
             await _context.SaveChangesAsync();
 
+            //return Ok(new { enderecoId = id });
             return endereco;
         }
 
