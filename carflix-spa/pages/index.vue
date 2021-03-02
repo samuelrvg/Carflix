@@ -2,7 +2,60 @@
   <div>
       <router-link class="btn btn-primary mb-4" to="/endereco">Novo</router-link>
     <div>
-      <b-table striped hover :items="enderecos"></b-table>
+      <table id="table" class="table table-hover table-reponsive-md">
+            <thead>
+                <tr>
+                  <th>
+                      <strong>Cep</strong></th>
+                  <th>
+                      <strong>Logradouro</strong>
+                  </th>
+                  <th>
+                      <strong>Complemento</strong>
+                  </th>
+                  <th>
+                      <strong>Bairro</strong>
+                  </th>
+                  <th>
+                    <strong>Localidade</strong>
+                  </th>
+                  <th>
+                    <strong>Uf</strong>
+                  </th>
+                  <th>
+                    <strong>IBGE</strong>
+                  </th>
+                  <th>
+                    <strong>GIA</strong>
+                  </th>
+                  <th>
+                    <strong>DDD</strong>
+                  </th>
+                  <th>
+                    <strong>Siafi</strong>
+                  </th>
+                  <th>
+                    <strong>Data Criação</strong>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr v-for="(endereco, index) in enderecosPaginate" :key="index">
+                <td>{{ endereco.cep }}</td>
+                <td>{{ endereco.logradouro }}</td>
+                <td>{{ endereco.complemento }}</td>
+                <td>{{ endereco.bairro }}</td>
+                <td>{{ endereco.localidade }}</td>
+                <td>{{ endereco.uf }}</td>
+                <td>{{ endereco.ibge }}</td>
+                <td>{{ endereco.gia }}</td>
+                <td>{{ endereco.ddd }}</td>
+                <td>{{ endereco.siafi }}</td>
+                <td>{{ endereco.dataCriacao ? $moment(endereco.dataCriacao).format('DD/MM/YYYY') : '' }}</td>
+              </tr>
+          </tbody>
+      </table>
+      <b-pagination v-model="currentPage" :items="enderecos" :current-page="currentPage" :per-page="itemsPerPage" :total-rows="enderecos.length" size="sm"></b-pagination>
     </div>
   </div>
 </template>
@@ -11,18 +64,35 @@
 export default {
   data(){
     return {
-      enderecos: []
+      currentPage: 1,
+      itemsPerPage: 10,
+      enderecos: [],
+      enderecosPaginate: []
     }
   },
   async mounted () {
       await this.asyncData();
   },
+  watch: {
+      currentPage () {
+        const items = this.paginate(this.enderecos);
+        this.enderecosPaginate = items;
+      },
+      itemsPerPage () {
+        const items = this.paginate(this.enderecos);
+        this.enderecosPaginate = items;
+      }
+  },
   methods:{
     async asyncData(){
       const response = await this.$axios.$get(`endereco`)
-      
+
+      this.enderecosPaginate = this.paginate(response)
       this.enderecos = response;
-    }
+    },
+    paginate (array) {
+      return array.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+    },
   }
 }
 </script>
