@@ -10,10 +10,9 @@
                             label-for="cep"
                         >
                         <b-form-input
-                            id="endereco"
+                            id="cep"
                             v-model="endereco.cep"
                             type="text"
-                            placeholder="Cep"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -29,7 +28,6 @@
                             id="logradouro"
                             v-model="endereco.logradouro"
                             type="text"
-                            placeholder="Logradouro"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -47,7 +45,6 @@
                             id="complemento"
                             v-model="endereco.complemento"
                             type="text"
-                            placeholder="Complemento"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -55,15 +52,14 @@
 
                     <div class="col-md-6">
                         <b-form-group
-                            id="Bairro"
+                            id="bairro"
                             label="Bairro:"
                             label-for="Bairro"
                         >
                         <b-form-input
-                            id="Bairro"
+                            id="bairro"
                             v-model="endereco.bairro"
                             type="text"
-                            placeholder="Bairro"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -81,7 +77,6 @@
                             id="localidade"
                             v-model="endereco.localidade"
                             type="text"
-                            placeholder="Localidade"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -97,7 +92,6 @@
                             id="uf"
                             v-model="endereco.uf"
                             type="text"
-                            placeholder="Uf"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -114,8 +108,7 @@
                         <b-form-input
                             id="ibge"
                             v-model="endereco.ibge"
-                            type="number"
-                            placeholder="ibge"
+                            type="text"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -130,8 +123,7 @@
                         <b-form-input
                             id="gia"
                             v-model="endereco.gia"
-                            type="number"
-                            placeholder="gia"
+                            type="text"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -148,8 +140,7 @@
                         <b-form-input
                             id="ddd"
                             v-model="endereco.ddd"
-                            type="number"
-                            placeholder="DDD"
+                            type="text"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -164,8 +155,7 @@
                         <b-form-input
                             id="siafi"
                             v-model="endereco.siafi"
-                            type="number"
-                            placeholder="Siafi"
+                            type="text"
                             required
                             ></b-form-input>
                         </b-form-group>
@@ -189,6 +179,14 @@ export default {
       async onSubmit(event) {
         event.preventDefault()
         await this.$axios.$post(`endereco`, this.endereco)
+
+        // this.$bvToast.toast('Endereço salvo com sucesso!', {
+        //   title: `Sucesso`,
+        //   variant: 'success',
+        //   solid: true,
+        // })
+
+        this.$router.push({ path: '/' });
       },
     }
 }

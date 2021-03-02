@@ -3,7 +3,7 @@
         <div class="py-3">
             <div class="row">
                 <div class="col-md-6">
-                    <b-form-input v-model="cep" placeholder="Digite o CEP"></b-form-input>
+                    <input class="form-control" minlength="8" type="number" v-model="cep" placeholder="Digite o CEP" />
                 </div>
                 <div class="col-md-2">
                     <b-button @click="buscarEndereco()" variant="primary">Buscar</b-button>
@@ -30,17 +30,36 @@ export default {
     },
     methods:{
         async buscarEndereco(){
-            if(this.cep){
+            if(this.cep.length === 8){
                 await fetch(`https://viacep.com.br/ws/${this.cep}/json`, { method:'get' })
                 .then(response => {
                     response.json().then(endereco => {
-                        this.endereco = endereco;
+                        const { erro } = endereco
+                        if(erro){
+                            this.showToast(erro);
+                            this.endereco = null;
+                        }
+                        else
+                            this.endereco = endereco;
                     })
                 })
                 .catch(err => {
                     console.log('err', err)
                 })
             }
+            else{
+                this.showToast();
+                this.endereco = null;
+            }
+        },
+        showToast(erro = false){
+            const message = erro ? 'CEP não encontrado' : 'CEP Inválido!'
+            const variant = erro ? 'danger' : 'warning'
+            this.$bvToast.toast(message, {
+                    title: `Atenção`,
+                    variant: variant,
+                    solid: true,
+            })
         }
     }
 }
