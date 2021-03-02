@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Carflix.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System;
 
 namespace Carflix.Api.Controllers
 {
@@ -56,6 +57,7 @@ namespace Carflix.Api.Controllers
                 return BadRequest();
             }
 
+            endereco.DataAtualizacao = DateTime.Now;
             _context.Entry(endereco).State = EntityState.Modified;
 
             try
