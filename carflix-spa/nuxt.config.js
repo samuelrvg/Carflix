@@ -42,7 +42,7 @@ export default {
   ],
 
   axios: {
-    baseURL: 'https://viacep.com.br/ws/',
+    baseURL: 'https://localhost:44384/',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

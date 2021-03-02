@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-md-12">
-            <b-form @submit="onSubmit" @reset="onReset">
+            <b-form @submit="onSubmit">
                 <div class="row">
                     <div class="col-md-6">
                         <b-form-group
@@ -173,7 +173,7 @@
                 </div>
 
                 <b-button type="submit" variant="primary">Salvar</b-button>
-                <b-button type="reset" variant="danger">Limpar</b-button>
+                <!-- <b-button type="reset" variant="danger">Limpar</b-button> -->
             </b-form>
         </div>
     </div>
@@ -186,13 +186,10 @@ export default {
         }
     },
     methods: {
-      onSubmit(event) {
+      async onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.endereco))
+        await this.$axios.$post(`endereco`, this.endereco)
       },
-      onReset(event) {
-        event.preventDefault()
-      }
     }
 }
 </script>

@@ -31,8 +31,15 @@ export default {
     methods:{
         async buscarEndereco(){
             if(this.cep){
-                const response = await this.$axios.$get(`${this.cep}/json`)
-                this.endereco = response;
+                await fetch(`https://viacep.com.br/ws/${this.cep}/json`, { method:'get' })
+                .then(response => {
+                    response.json().then(endereco => {
+                        this.endereco = endereco;
+                    })
+                })
+                .catch(err => {
+                    console.log('err', err)
+                })
             }
         }
     }
