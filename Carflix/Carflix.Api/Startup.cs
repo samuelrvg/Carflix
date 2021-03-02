@@ -31,6 +31,8 @@ namespace Carflix.Api
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=Carflix;Trusted_Connection=True;";
             services.AddDbContext<CarflixContext>(options => options.UseSqlServer(connection));
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +42,13 @@ namespace Carflix.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "v1");
+            });
 
             app.UseHttpsRedirection();
 
