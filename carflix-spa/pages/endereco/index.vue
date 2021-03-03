@@ -3,13 +3,13 @@
     <div class="py-3">
       <div class="row">
         <div class="col-md-4">
-          <input
+          <the-mask
             class="form-control"
-            type="text"
-            maxlength="9"
             v-model="cep"
+            mask="#####-###"
+            type="text"
             placeholder="Digite o CEP"
-          />
+          ></the-mask>
         </div>
         <div class="col-md-2">
           <b-button @click="buscarEndereco()" variant="primary"
@@ -28,9 +28,11 @@
 
 <script>
 import crudPartial from "../../components/endereco/crud-partial";
+import { TheMask } from "vue-the-mask";
 export default {
   components: {
-    "crud-partial": crudPartial
+    "crud-partial": crudPartial,
+    "the-mask": TheMask
   },
   data() {
     return {
