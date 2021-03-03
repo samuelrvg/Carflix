@@ -9,12 +9,12 @@
     - [x] Salvar no banco de dados.
     - [x] Listar em tela os endereços cadastrados.
 	
-### Funcionalidades adicionadas
+### Funcionalidades adicionais
 
 - [x] Documentação com Swagger.
-- [x] Paginação da lista de endereços.
-- [x] Atualizar endereço.
-- [x] Excluir endereço.
+- [x] Paginação.
+- [x] Atualizar.
+- [x] Excluir.
 
 ### Principais Tecnologias
 
