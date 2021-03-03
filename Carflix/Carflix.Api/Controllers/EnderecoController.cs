@@ -9,7 +9,7 @@ using System;
 namespace Carflix.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class EnderecoController : ControllerBase
     {
         private readonly CarflixContext _context;

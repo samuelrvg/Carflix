@@ -43,7 +43,7 @@
               </tr>
           </thead>
           <tbody>
-              <tr v-for="(endereco, index) in enderecosPaginate" :key="index">
+              <tr v-for="(endereco, index) in enderecosPaginados" :key="index">
                 <td>{{ endereco.cep }}</td>
                 <td>{{ endereco.logradouro }}</td>
                 <td>{{ endereco.complemento }}</td>
@@ -56,7 +56,7 @@
                 <td>{{ endereco.siafi }}</td>
                 <td>{{ endereco.dataCriacao ? $moment(endereco.dataCriacao).format('DD/MM/YYYY') : '' }}</td>
                 <td>
-                  <NuxtLink class="btn btn-info" :to="`endereco/editar/${endereco.enderecoId}`"><span class="typcn typcn-edit font-size">Editar</span></NuxtLink>
+                  <NuxtLink class="btn btn-info" :to="`endereco/editar/${endereco.enderecoId}`">Editar</NuxtLink>
                   <b-button variant="danger" @click.prevent="excluir(endereco)">Excluir</b-button>
                 </td>
               </tr>
@@ -74,7 +74,7 @@ export default {
       currentPage: 1,
       itemsPerPage: 10,
       enderecos: [],
-      enderecosPaginate: []
+      enderecosPaginados: []
     }
   },
   async mounted () {
@@ -83,18 +83,18 @@ export default {
   watch: {
       currentPage () {
         const items = this.paginate(this.enderecos);
-        this.enderecosPaginate = items;
+        this.enderecosPaginados = items;
       },
       itemsPerPage () {
         const items = this.paginate(this.enderecos);
-        this.enderecosPaginate = items;
+        this.enderecosPaginados = items;
       }
   },
   methods:{
     async asyncData(){
       const response = await this.$axios.$get(`endereco`)
 
-      this.enderecosPaginate = this.paginate(response)
+      this.enderecosPaginados = this.paginate(response)
       this.enderecos = response;
     },
     async excluir(endereco){

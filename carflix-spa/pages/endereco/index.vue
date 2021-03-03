@@ -2,8 +2,8 @@
     <div>
         <div class="py-3">
             <div class="row">
-                <div class="col-md-6">
-                    <input class="form-control" minlength="8" type="text" v-model="cep" placeholder="Digite o CEP" />
+                <div class="col-md-4">
+                    <input class="form-control" type="text" maxlength="9" v-model="cep" placeholder="Digite o CEP" />
                 </div>
                 <div class="col-md-2">
                     <b-button @click="buscarEndereco()" variant="primary">Buscar</b-button>
@@ -26,14 +26,14 @@ export default {
     },
     data(){
         return {
-            cep: '01001000',
+            cep: '',
             endereco: null
         }
     },
     methods:{
         async buscarEndereco(){
-            if(this.cep.length >= 8){
-                const formatCep = this.cep.replace('-','');
+            const formatCep = this.cep.replace('-','');
+            if(formatCep.length === 8){
                 await fetch(`https://viacep.com.br/ws/${formatCep}/json`, { method:'get' })
                 .then(response => {
                     response.json().then(endereco => {

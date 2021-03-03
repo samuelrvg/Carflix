@@ -39,6 +39,7 @@ namespace Carflix.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DDD")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DataAtualizacao")
@@ -48,6 +49,7 @@ namespace Carflix.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Gia")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ibge")
@@ -63,6 +65,7 @@ namespace Carflix.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Siafi")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Uf")

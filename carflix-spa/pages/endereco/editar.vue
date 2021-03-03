@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h2 class="pb-3">Edição Endereço</h2>
+        <h2 class="pb-3">Editar</h2>
         <b-form @submit="onSubmit">
-            <crud-partial :endereco="endereco"></crud-partial>
+            <crud-partial :endereco="endereco" v-if="endereco !== null"></crud-partial>
         </b-form>
     </div>
 </template>
@@ -19,7 +19,6 @@ export default {
         }
     },
     async asyncData ({ $axios, params, redirect }) {
-        console.log('asdasd', params)
         if (!params.id) {
             redirect('/');
             return;
