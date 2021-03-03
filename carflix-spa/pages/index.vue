@@ -65,7 +65,7 @@
             <td>
               <NuxtLink
                 class="btn btn-info"
-                :to="`endereco/editar/${endereco.enderecoId}`"
+                :to="`endereco/${endereco.enderecoId}`"
                 >Editar</NuxtLink
               >
               <b-button variant="danger" @click.prevent="excluir(endereco)"
