@@ -1,14 +1,34 @@
-# Carflix Api
+# Carflix - Teste
 
-## Run
+### Requisitos
 
+- [x] Sistema Web.
+- [x] Usar C# ou outra linguagem orientada a objetos.
+- [x] Usar API do site [ViaCEP](https://viacep.com.br).
+    - [x] Retornar endereço com base no CEP.
+    - [x] Salvar no banco de dados.
+    - [x] Listar em tela os endereços cadastrados.
+	
+### Funcionalidades adicionadas
+
+- [x] Documentação com Swagger.
+- [x] Paginação da lista de endereços.
+- [x] Atualizar endereço.
+- [x] Excluir endereço.
+
+### Principais Tecnologias
+
+- Asp.Net Core 3.1
+- NuxtJS
+- SqlServer
+
+### Back-End
+Executar o comando abaixo para gerar o banco de dados com base nas migrations.
 ```bash
-Update-Database
+ Update-Database
 ```
 
-# carflix-spa
-
-## Build Setup
+### Front-End
 
 ```bash
 # install dependencies
