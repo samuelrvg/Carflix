@@ -1,4 +1,4 @@
-# Carflix - Teste
+# Carflix
 
 ### Requisitos
 
